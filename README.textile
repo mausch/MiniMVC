@@ -1,0 +1,9 @@
+*MiniMVC* is a simple MVC framework for embedded web modules.
+
+Currently used in:
+
+* "NHWebConsole":http://github.com/mausch/NHWebConsole
+* "QuartzNetWebConsole":http://github.com/mausch/QuartzNetWebConsole
+* "BooWebConsole":http://github.com/mausch/BooWebConsole
+
+
