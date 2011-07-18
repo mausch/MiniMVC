@@ -58,6 +58,7 @@
     <Compile Include="RawResult.cs" />
     <Compile Include="RedirectResult.cs" />
     <Compile Include="Setup.cs" />
+    <Compile Include="X.cs" />
     <Compile Include="XDocResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
