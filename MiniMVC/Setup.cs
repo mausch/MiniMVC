@@ -17,11 +17,9 @@
 using System;
 using System.IO;
 using System.Reflection;
-using NVelocity.App;
 
 namespace MiniMVC {
     public static class Setup {
-        public static Func<VelocityEngine> TemplateEngine { get; set; }
 
         public static Func<string, Controller> ControllerFactory { get; set; }
 
@@ -29,8 +27,6 @@ namespace MiniMVC {
 
         static Setup() {
             AssemblyDate = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
-            var engine = new EmbeddedVelocityEngine();
-            TemplateEngine = () => engine;
             ControllerFactory = controller => {
                 var controllerType = Type.GetType(controller, false, false);
                 if (controllerType == null)
