@@ -19,9 +19,6 @@ using System.Web;
 using System.Web.SessionState;
 
 namespace MiniMVC {
-    /// <summary>
-    /// Handles view plumbing
-    /// </summary>
     public abstract class Controller : IController, IHttpHandler, IReadOnlySessionState {
         public abstract IResult Execute(HttpContextBase context);
 
@@ -29,17 +26,6 @@ namespace MiniMVC {
             var contextWrapper = new HttpContextWrapper(context);
             var result = Execute(contextWrapper);
             result.Execute(contextWrapper);
-        }
-
-        public string GetEmbeddedViewName(string name) {
-            return string.Format("{0}.Resources.{1}.html", GetType().Assembly.FullName.Split(',')[0], name);
-        }
-
-        private string viewName;
-
-        public virtual string ViewName {
-            get { return viewName ?? GetEmbeddedViewName(ControllerName); }
-            set { viewName = value; }
         }
 
         public string ControllerName {
