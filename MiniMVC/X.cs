@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Xml.Linq;
 
 namespace MiniMVC {
@@ -32,6 +33,12 @@ namespace MiniMVC {
             var x = "<x>" + xml + "</x>";
             var xdoc = XDocument.Parse(x);
             return xdoc.Document.Root.Nodes().ToArray();
+        }
+
+        public static XElement Alter(this XElement e, Func<bool> pred, Action<XElement> alter) {
+            if (pred())
+                alter(e);
+            return e;
         }
 
         public static readonly XDocumentType XHTML1_0_Transitional = new XDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd", null);
