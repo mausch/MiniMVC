@@ -93,5 +93,15 @@ namespace MiniMVC {
         /// XHTML namespace (http://www.w3.org/1999/xhtml)
         /// </summary>
         public static readonly XNamespace XHTML_Namespace = XNamespace.Get("http://www.w3.org/1999/xhtml");
+
+        public static XNode FixEmptyScripts(XNode n) {
+            if (n is XElement) {
+                var e = n as XElement;
+                if (e.Name.LocalName == "script" && e.Attribute("src") != null)
+                    return new XElement(e.Name, e.Attributes(), new XText(""), e.Nodes().Select(FixEmptyScripts));
+                return new XElement(e.Name, e.Attributes(), e.Nodes().Select(FixEmptyScripts));
+            }
+            return n;
+        }
     }
 }
