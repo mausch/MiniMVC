@@ -47,17 +47,17 @@ namespace MiniMVC {
         /// <summary>
         /// XHTML 1.0 Transitional doctype
         /// </summary>
-        public static readonly XDocumentType XHTML1_0_Transitional = new XDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd", null);
+        public static readonly XDocumentType XHTML1_0_Transitional_Doctype = new XDocumentType("html", "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd", null);
 
         /// <summary>
         /// XHTML 1.0 Strict doctype
         /// </summary>
-        public static readonly XDocumentType XHTML1_0_Strict = new XDocumentType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
+        public static readonly XDocumentType XHTML1_0_Strict_Doctype = new XDocumentType("html", "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", null);
 
         /// <summary>
         /// HTML 5 doctype
         /// </summary>
-        public static readonly XDocumentType HTML5 = new XDocumentType("html", null, null, null);
+        public static readonly XDocumentType HTML5_Doctype = new XDocumentType("html", null, null, null);
 
         /// <summary>
         /// Non-breaking space
