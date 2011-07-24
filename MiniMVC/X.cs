@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -94,14 +95,36 @@ namespace MiniMVC {
         /// </summary>
         public static readonly XNamespace XHTML_Namespace = XNamespace.Get("http://www.w3.org/1999/xhtml");
 
-        public static XNode FixEmptyScripts(XNode n) {
+        private static readonly HashSet<string> emptyElems = new HashSet<string> { "area", "base", "basefont", "br", "col", "command", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr" };
+
+        public static XNode FixEmptyElements(XNode n) {
             if (n is XElement) {
                 var e = n as XElement;
-                if (e.Name.LocalName == "script" && e.Attribute("src") != null)
-                    return new XElement(e.Name, e.Attributes(), new XText(""), e.Nodes().Select(FixEmptyScripts));
-                return new XElement(e.Name, e.Attributes(), e.Nodes().Select(FixEmptyScripts));
+                var isEmptyElem = emptyElems.Contains(e.Name.LocalName);
+                if (isEmptyElem && !e.IsEmpty)
+                    return new XElement(e.Name, e.Attributes());
+                if (!isEmptyElem && e.IsEmpty)
+                    return new XElement(e.Name, e.Attributes(), new XText(""), e.Nodes().Select(FixEmptyElements));
+                return new XElement(e.Name, e.Attributes(), e.Nodes().Select(FixEmptyElements));
             }
             return n;
+        }
+
+        public static XNode ApplyNamespace(XNamespace ns, XNode n) {
+            if (n is XElement) {
+                var e = n as XElement;
+                return new XElement(ns + e.Name.LocalName, e.Attributes(), e.Nodes().Select(x => ApplyNamespace(ns, x)));
+            }
+            return n;
+        }
+
+        public static XNode MakeHTMLCompatible(XNode n) {
+            var xhtml = ApplyNamespace(XHTML_Namespace, n);
+            return FixEmptyElements(xhtml);
+        }
+
+        public static XDocument MakeHTML5Doc(XElement root) {
+            return new XDocument(HTML5_Doctype, MakeHTMLCompatible(root));
         }
     }
 }
