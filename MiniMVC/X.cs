@@ -98,22 +98,25 @@ namespace MiniMVC {
         private static readonly HashSet<string> emptyElems = new HashSet<string> { "area", "base", "basefont", "br", "col", "command", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr" };
 
         public static XNode FixEmptyElements(XNode n) {
-            if (n is XElement) {
-                var e = n as XElement;
+            var e = n as XElement;
+            if (e != null) {
                 var isEmptyElem = emptyElems.Contains(e.Name.LocalName);
                 if (isEmptyElem && !e.IsEmpty)
                     return new XElement(e.Name, e.Attributes());
+                var children = e.Nodes().Select(FixEmptyElements);
                 if (!isEmptyElem && e.IsEmpty)
-                    return new XElement(e.Name, e.Attributes(), new XText(""), e.Nodes().Select(FixEmptyElements));
-                return new XElement(e.Name, e.Attributes(), e.Nodes().Select(FixEmptyElements));
+                    return new XElement(e.Name, e.Attributes(), new XText(""), children);
+                return new XElement(e.Name, e.Attributes(), children);
             }
             return n;
         }
 
         public static XNode ApplyNamespace(XNamespace ns, XNode n) {
-            if (n is XElement) {
-                var e = n as XElement;
-                return new XElement(ns + e.Name.LocalName, e.Attributes(), e.Nodes().Select(x => ApplyNamespace(ns, x)));
+            var e = n as XElement;
+            if (e != null) {
+                var name = ns + e.Name.LocalName;
+                var children = e.Nodes().Select(x => ApplyNamespace(ns, x));
+                return new XElement(name, e.Attributes(), children);
             }
             return n;
         }
