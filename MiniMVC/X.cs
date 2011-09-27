@@ -129,5 +129,11 @@ namespace MiniMVC {
         public static XDocument MakeHTML5Doc(XElement root) {
             return new XDocument(HTML5_Doctype, MakeHTMLCompatible(root));
         }
+
+        public static string SpacesToNbsp(string s) {
+            if (s == null)
+                return null;
+            return s.Replace(' ', (char)0xa0);
+        }
     }
 }
