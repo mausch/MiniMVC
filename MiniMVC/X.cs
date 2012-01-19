@@ -134,6 +134,8 @@ namespace MiniMVC {
         }
 
         public static void WriteToStream(this XNode n, Stream output) {
+            if (n == null)
+                return;
             using (var xmlwriter = XmlWriter.Create(output, new XmlWriterSettings {OmitXmlDeclaration = true}))
                 n.FixEmptyElements().WriteTo(xmlwriter);
         }
