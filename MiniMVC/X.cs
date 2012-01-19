@@ -35,7 +35,7 @@ namespace MiniMVC {
         /// <returns></returns>
         public static XNode[] Raw(string xml) {
             var x = "<x>" + xml + "</x>";
-            var xdoc = XDocument.Parse(x);
+            var xdoc = XDocument.Parse(x, LoadOptions.PreserveWhitespace);
             return xdoc.Document.Root.Nodes().ToArray();
         }
 

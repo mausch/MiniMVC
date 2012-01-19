@@ -34,5 +34,12 @@ namespace MiniMVC.Tests {
             Console.WriteLine(xhtml.ToString());
             Assert.True(Regex.Matches(xhtml.ToString(), "xmlns=\"http://www.w3.org/1999/xhtml\"").Count == 1);
         }
+
+        [Test]
+        public void XRawPreservesSpaces() {
+            var n = X.Raw("  <a> hello world</a>");
+            var x = X.E("span", n);
+            Assert.AreEqual("<span>  <a> hello world</a></span>", x.ToString());
+        }
     }
 }
