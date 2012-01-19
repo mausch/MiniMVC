@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
@@ -40,6 +42,16 @@ namespace MiniMVC.Tests {
             var n = X.Raw("  <a> hello world</a>");
             var x = X.E("span", n);
             Assert.AreEqual("<span>  <a> hello world</a></span>", x.ToString());
+        }
+
+        [Test]
+        public void WriteToStream() {
+            var ms = new MemoryStream();
+            var n = X.E("a", X.Raw("  <img src='something'/>"));
+            n.WriteToStream(ms);
+            ms.Position = 0;
+            var s = Encoding.UTF8.GetString(ms.ToArray());
+            Assert.AreEqual("﻿<a>  <img src=\"something\" /></a>", s);
         }
     }
 }

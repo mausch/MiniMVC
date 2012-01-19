@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace MiniMVC {
@@ -115,7 +118,7 @@ namespace MiniMVC {
             var e = n as XElement;
             if (e != null) {
                 var name = ns + e.Name.LocalName;
-                var children = e.Nodes().Select(x => ApplyNamespace(x, ns));
+                var children = e.Nodes().Select(x => x.ApplyNamespace(ns));
                 return new XElement(name, e.Attributes(), children);
             }
             return n;
@@ -128,6 +131,18 @@ namespace MiniMVC {
 
         public static XDocument MakeHTML5Doc(this XElement root) {
             return new XDocument(HTML5_Doctype, MakeHTMLCompatible(root));
+        }
+
+        public static void WriteToStream(this XNode n, Stream output) {
+            using (var xmlwriter = XmlWriter.Create(output, new XmlWriterSettings {OmitXmlDeclaration = true}))
+                n.FixEmptyElements().WriteTo(xmlwriter);
+        }
+
+        public static void WriteToResponse(this XNode n) {
+            var ctx = HttpContext.Current;
+            if (ctx == null)
+                throw new Exception("No current HttpContext");
+            n.WriteToStream(ctx.Response.OutputStream);
         }
 
         public static string SpacesToNbsp(string s) {
