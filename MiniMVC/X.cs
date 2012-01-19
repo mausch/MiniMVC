@@ -137,6 +137,7 @@ namespace MiniMVC {
             var settings = new XmlWriterSettings {
                 OmitXmlDeclaration = true,
                 ConformanceLevel = ConformanceLevel.Fragment,
+                NewLineHandling = NewLineHandling.None,
             };
             return XmlWriter.Create(output, settings);
         }
@@ -174,6 +175,29 @@ namespace MiniMVC {
 
         public static void WriteToResponse(this IEnumerable<XElement> elements) {
             elements.Cast<XNode>().WriteToResponse();
+        }
+
+        public static bool IsNullOrWhiteSpace(this string value) {
+            if (value != null) {
+                for (int i = 0; i < value.Length; i++) {
+                    if (!char.IsWhiteSpace(value[i])) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static bool IsWhiteSpace(this XNode n) {
+            var t = n as XText;
+            return t != null && t.Value.IsNullOrWhiteSpace();
+        }
+
+        public static IEnumerable<XNode> Trim(this IEnumerable<XNode> nodes) {
+            return nodes.SkipWhile(IsWhiteSpace)
+                .Reverse()
+                .SkipWhile(IsWhiteSpace)
+                .Reverse();
         }
 
         public static string SpacesToNbsp(string s) {

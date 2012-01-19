@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
@@ -52,6 +53,14 @@ namespace MiniMVC.Tests {
             ms.Position = 0;
             var s = Encoding.UTF8.GetString(ms.ToArray());
             Assert.AreEqual("﻿<a>  <img src=\"something\" /></a>", s);
+        }
+
+        [Test]
+        public void Trim() {
+            var nodes = X.Raw("  <img src='something'/>  <img/> <b/>  ");
+            Assert.AreEqual(7, nodes.Length);
+            var trim = nodes.Trim().ToArray();
+            Assert.AreEqual(5, trim.Length);
         }
     }
 }
