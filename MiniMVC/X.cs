@@ -133,10 +133,18 @@ namespace MiniMVC {
             return new XDocument(HTML5_Doctype, MakeHTMLCompatible(root));
         }
 
+        public static XmlWriter CreateXmlWriter(Stream output) {
+            var settings = new XmlWriterSettings {
+                OmitXmlDeclaration = true,
+                ConformanceLevel = ConformanceLevel.Fragment,
+            };
+            return XmlWriter.Create(output, settings);
+        }
+
         public static void WriteToStream(this XNode n, Stream output) {
             if (n == null)
                 return;
-            using (var xmlwriter = XmlWriter.Create(output, new XmlWriterSettings {OmitXmlDeclaration = true}))
+            using (var xmlwriter = CreateXmlWriter(output))
                 n.FixEmptyElements().WriteTo(xmlwriter);
         }
 
@@ -145,6 +153,27 @@ namespace MiniMVC {
             if (ctx == null)
                 throw new Exception("No current HttpContext");
             n.WriteToStream(ctx.Response.OutputStream);
+        }
+
+        public static void WriteToStream(this IEnumerable<XNode> nodes, Stream output) {
+            if (nodes == null)
+                return;
+            var root = X.E("x", nodes).FixEmptyElements() as XElement;
+            using (var xmlwriter = CreateXmlWriter(output)) {
+                foreach (var n in root.Nodes())
+                    n.WriteTo(xmlwriter);
+            }
+        }
+
+        public static void WriteToResponse(this IEnumerable<XNode> nodes) {
+            var ctx = HttpContext.Current;
+            if (ctx == null)
+                throw new Exception("No current HttpContext");
+            nodes.WriteToStream(ctx.Response.OutputStream);
+        }
+
+        public static void WriteToResponse(this IEnumerable<XElement> elements) {
+            elements.Cast<XNode>().WriteToResponse();
         }
 
         public static string SpacesToNbsp(string s) {
