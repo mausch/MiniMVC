@@ -97,7 +97,7 @@ namespace MiniMVC {
 
         private static readonly HashSet<string> emptyElems = new HashSet<string> { "area", "base", "basefont", "br", "col", "command", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr" };
 
-        public static XNode FixEmptyElements(XNode n) {
+        public static XNode FixEmptyElements(this XNode n) {
             var e = n as XElement;
             if (e != null) {
                 var isEmptyElem = emptyElems.Contains(e.Name.LocalName);
@@ -111,22 +111,22 @@ namespace MiniMVC {
             return n;
         }
 
-        public static XNode ApplyNamespace(XNamespace ns, XNode n) {
+        public static XNode ApplyNamespace(this XNode n, XNamespace ns) {
             var e = n as XElement;
             if (e != null) {
                 var name = ns + e.Name.LocalName;
-                var children = e.Nodes().Select(x => ApplyNamespace(ns, x));
+                var children = e.Nodes().Select(x => ApplyNamespace(x, ns));
                 return new XElement(name, e.Attributes(), children);
             }
             return n;
         }
 
-        public static XNode MakeHTMLCompatible(XNode n) {
-            var xhtml = ApplyNamespace(XHTML_Namespace, n);
+        public static XNode MakeHTMLCompatible(this XNode n) {
+            var xhtml = ApplyNamespace(n, XHTML_Namespace);
             return FixEmptyElements(xhtml);
         }
 
-        public static XDocument MakeHTML5Doc(XElement root) {
+        public static XDocument MakeHTML5Doc(this XElement root) {
             return new XDocument(HTML5_Doctype, MakeHTMLCompatible(root));
         }
 
