@@ -205,5 +205,8 @@ namespace MiniMVC {
                 return null;
             return s.Replace(' ', (char)0xa0);
         }
+
+        public static readonly IEnumerable<XElement> NoElements = Enumerable.Empty<XElement>();
+        public static readonly IEnumerable<XNode> NoNodes = Enumerable.Empty<XNode>();
     }
 }
