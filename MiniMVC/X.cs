@@ -94,6 +94,21 @@ namespace MiniMVC {
         public static readonly string copy = "\u00A9";
 
         /// <summary>
+        /// Ampersand
+        /// </summary>
+        public static readonly string amp = "\u0026";
+
+        /// <summary>
+        /// Less than
+        /// </summary>
+        public static readonly string lt = "\u003C";
+
+        /// <summary>
+        /// Greater than
+        /// </summary>
+        public static readonly string gt = "\u003E";
+
+        /// <summary>
         /// XHTML namespace (http://www.w3.org/1999/xhtml)
         /// </summary>
         public static readonly XNamespace XHTML_Namespace = XNamespace.Get("http://www.w3.org/1999/xhtml");
