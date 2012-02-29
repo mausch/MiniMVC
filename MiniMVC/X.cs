@@ -206,6 +206,17 @@ namespace MiniMVC {
             return s.Replace(' ', (char)0xa0);
         }
 
+        public static XElement Javascript(string content) {
+            var cdata = new XCData("*/" + content + "/*");
+            var begin = new XText("/*");
+            var end = new XText("*/");
+            return E("script", A("type", "text/javascript"), begin, cdata, end);
+        }
+
+        public static XElement Javascript(XCData content) {
+            return Javascript(content.Value);
+        }
+
         public static readonly IEnumerable<XElement> NoElements = Enumerable.Empty<XElement>();
         public static readonly IEnumerable<XNode> NoNodes = Enumerable.Empty<XNode>();
     }

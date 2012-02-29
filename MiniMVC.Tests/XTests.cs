@@ -62,5 +62,11 @@ namespace MiniMVC.Tests {
             var trim = nodes.Trim().ToArray();
             Assert.AreEqual(5, trim.Length);
         }
+
+        [Test]
+        public void Javascript() {
+            var e = X.Javascript("function() { return a && b > 5; }");
+            Assert.AreEqual("<script type=\"text/javascript\">/*<![CDATA[*/function() { return a && b > 5; }/*]]>*/</script>", e.ToString());
+        }
     }
 }
