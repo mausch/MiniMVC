@@ -68,5 +68,31 @@ namespace MiniMVC.Tests {
             var e = X.Javascript("function() { return a && b > 5; }");
             Assert.AreEqual("<script type=\"text/javascript\">/*<![CDATA[*/function() { return a && b > 5; }/*]]>*/</script>", e.ToString());
         }
+
+        [Test]
+        public void SelectOption_one() {
+            var options = new[] {
+                X.E("option", X.A("value", "1"), "text1"),
+                X.E("option", X.A("value", "2"), "text2"),
+            };
+            var options2 = X.SelectOption(options, "1").ToList();
+            Assert.IsNull(options[0].Attribute("selected"));
+            Assert.IsNull(options[1].Attribute("selected"));
+            Assert.AreEqual("selected", options2[0].Attribute("selected").Value);
+            Assert.IsNull(options2[1].Attribute("selected"));
+        }
+
+        [Test]
+        public void SelectOption_one_with_empty() {
+            var options = new[] {
+                X.E("option", X.A("value", "1"), "text1"),
+                X.E("option", "text2"),
+            };
+            var options2 = X.SelectOption(options, "1").ToList();
+            Assert.IsNull(options[0].Attribute("selected"));
+            Assert.IsNull(options[1].Attribute("selected"));
+            Assert.AreEqual("selected", options2[0].Attribute("selected").Value);
+            Assert.IsNull(options2[1].Attribute("selected"));
+        }
     }
 }

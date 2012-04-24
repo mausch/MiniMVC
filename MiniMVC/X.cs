@@ -232,6 +232,19 @@ namespace MiniMVC {
             return Javascript(content.Value);
         }
 
+        public static IEnumerable<XElement> SelectOption(IEnumerable<XElement> options, string value) {
+            return options.Select(e => {
+                var valueAtt = e.Attribute("value");
+                if (valueAtt == null)
+                    return e;
+                if (valueAtt.Value != value)
+                    return e;
+                var newOption = X.E(e.Name.LocalName, e.Attributes().Cast<object>().Concat(e.Nodes().Cast<object>()).ToArray());
+                newOption.Add(X.A("selected", "selected"));
+                return newOption;
+            });
+        }
+
         public static readonly IEnumerable<XElement> NoElements = Enumerable.Empty<XElement>();
         public static readonly IEnumerable<XNode> NoNodes = Enumerable.Empty<XNode>();
     }
