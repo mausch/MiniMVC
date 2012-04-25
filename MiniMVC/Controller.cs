@@ -20,12 +20,11 @@ using System.Web.SessionState;
 
 namespace MiniMVC {
     public abstract class Controller : IController, IHttpHandler, IReadOnlySessionState {
-        public abstract IResult Execute(HttpContextBase context);
+        public abstract void Execute(HttpContextBase context);
 
         public virtual void ProcessRequest(HttpContext context) {
             var contextWrapper = new HttpContextWrapper(context);
-            var result = Execute(contextWrapper);
-            result.Execute(contextWrapper);
+            Execute(contextWrapper);
         }
 
         public string ControllerName {
