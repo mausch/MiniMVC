@@ -31,6 +31,10 @@ namespace MiniMVC {
             return new XElement(XName.Get(name), content);
         }
 
+        public static XNode T(string text) {
+            return new XText(text);
+        }
+
         /// <summary>
         /// Parses raw xml
         /// </summary>
