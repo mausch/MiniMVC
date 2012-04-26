@@ -17,22 +17,11 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Web;
 
 namespace MiniMVC {
     public static class Setup {
 
-        public static Func<string, Controller> ControllerFactory { get; set; }
-
-        public static readonly DateTime AssemblyDate;
-
-        static Setup() {
-            AssemblyDate = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
-            ControllerFactory = controller => {
-                var controllerType = Type.GetType(controller, false, false);
-                if (controllerType == null)
-                    throw new Exception(string.Format("Type '{0}' not found", controller));
-                return (Controller) Activator.CreateInstance(controllerType);
-            };
-        }
+        public static readonly DateTime AssemblyDate = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
     }
 }
