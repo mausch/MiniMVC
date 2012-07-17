@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
@@ -157,6 +158,7 @@ namespace MiniMVC {
                 OmitXmlDeclaration = true,
                 ConformanceLevel = ConformanceLevel.Fragment,
                 NewLineHandling = NewLineHandling.None,
+                Encoding = new UTF8Encoding(false),
             };
             return XmlWriter.Create(output, settings);
         }
