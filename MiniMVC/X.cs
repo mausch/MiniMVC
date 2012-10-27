@@ -268,6 +268,18 @@ namespace MiniMVC {
             });
         }
 
+        public static XElement RemoveChildNodes(this XElement element) {
+            var e = new XElement(element);
+            e.RemoveNodes();
+            return e;
+        }
+
+        public static XElement RemoveAttr(this XElement element) {
+            var e = new XElement(element);
+            e.RemoveAttributes();
+            return e;
+        }
+
         public static T Match<T>(this XNode node, Func<XCData, T> cdata, Func<XComment, T> comment, Func<XText, T> text, Func<XProcessingInstruction, T> instruction, Func<XElement, T> element) {
             var ncdata = node as XCData;
             if (ncdata != null)
