@@ -187,6 +187,15 @@ namespace MiniMVC {
             }
         }
 
+        public static string WriteToString(this IEnumerable<XNode> nodes) {
+            if (nodes == null)
+                return "";
+            using (var ms = new MemoryStream()) {
+                nodes.WriteToStream(ms);
+                return Encoding.UTF8.GetString(ms.ToArray());
+            }
+        }
+
         public static void WriteToResponse(this IEnumerable<XNode> nodes) {
             var ctx = HttpContext.Current;
             if (ctx == null)
