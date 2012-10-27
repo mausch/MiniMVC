@@ -204,7 +204,7 @@ namespace MiniMVC {
         }
 
         public static void WriteToResponse(this IEnumerable<XElement> elements) {
-            elements.Cast<XNode>().WriteToResponse();
+            elements.Select(x => (XNode) x).WriteToResponse();
         }
 
         public static bool IsNullOrWhiteSpace(this string value) {
