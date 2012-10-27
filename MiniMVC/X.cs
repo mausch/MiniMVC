@@ -120,10 +120,18 @@ namespace MiniMVC {
 
         private static readonly HashSet<string> emptyElems = new HashSet<string> { "area", "base", "basefont", "br", "col", "command", "frame", "hr", "img", "input", "isindex", "keygen", "link", "meta", "param", "source", "track", "wbr" };
 
+        public static bool IsEmptyElement(string elementName) {
+            return emptyElems.Contains(elementName);
+        }
+
+        public static bool IsEmptyElement(this XElement element) {
+            return IsEmptyElement(element.Name.LocalName);
+        }
+
         public static XNode FixEmptyElements(this XNode n) {
             var e = n as XElement;
             if (e != null) {
-                var isEmptyElem = emptyElems.Contains(e.Name.LocalName);
+                var isEmptyElem = e.IsEmptyElement();
                 if (isEmptyElem && !e.IsEmpty)
                     return new XElement(e.Name, e.Attributes());
                 var children = e.Nodes().Select(FixEmptyElements);
