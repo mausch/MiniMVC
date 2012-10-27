@@ -254,7 +254,7 @@ namespace MiniMVC {
                     return e;
                 if (valueAtt.Value != value)
                     return e;
-                var newOption = X.E(e.Name.LocalName, e.Attributes().Cast<object>().Concat(e.Nodes().Cast<object>()).ToArray());
+                var newOption = new XElement(e);
                 newOption.Add(X.A("selected", "selected"));
                 return newOption;
             });
