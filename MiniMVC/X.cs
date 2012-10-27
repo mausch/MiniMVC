@@ -260,6 +260,25 @@ namespace MiniMVC {
             });
         }
 
+        public static T Match<T>(this XNode node, Func<XCData, T> cdata, Func<XComment, T> comment, Func<XText, T> text, Func<XProcessingInstruction, T> instruction, Func<XElement, T> element) {
+            var ncdata = node as XCData;
+            if (ncdata != null)
+                return cdata(ncdata);
+            var ncomment = node as XComment;
+            if (ncomment != null)
+                return comment(ncomment);
+            var ntext = node as XText;
+            if (ntext != null)
+                return text(ntext);
+            var ninstruction = node as XProcessingInstruction;
+            if (ninstruction != null)
+                return instruction(ninstruction);
+            var nelement = node as XElement;
+            if (nelement != null)
+                return element(nelement);
+            throw new Exception("Unknown node type " + node.GetType());
+        }
+
         public static readonly IEnumerable<XElement> NoElements = Enumerable.Empty<XElement>();
         public static readonly IEnumerable<XNode> NoNodes = Enumerable.Empty<XNode>();
     }
