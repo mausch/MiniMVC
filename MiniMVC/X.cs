@@ -207,7 +207,7 @@ namespace MiniMVC {
             elements.Select(x => (XNode) x).WriteToResponse();
         }
 
-        public static bool IsNullOrWhiteSpace(this string value) {
+        public static bool IsNullOrWhiteSpace(string value) {
             if (value != null) {
                 for (int i = 0; i < value.Length; i++) {
                     if (!char.IsWhiteSpace(value[i])) {
@@ -220,7 +220,7 @@ namespace MiniMVC {
 
         public static bool IsWhiteSpace(this XNode n) {
             var t = n as XText;
-            return t != null && t.Value.IsNullOrWhiteSpace();
+            return t != null && IsNullOrWhiteSpace(t.Value);
         }
 
         public static IEnumerable<XNode> Trim(this IEnumerable<XNode> nodes) {
