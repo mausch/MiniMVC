@@ -48,6 +48,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpAsyncHandler.cs" />
+    <Compile Include="HttpAsyncHandlerWithReadOnlySession.cs" />
+    <Compile Include="HttpAsyncHandlerWithSession.cs" />
     <Compile Include="HttpContextStub.cs" />
     <Compile Include="HttpHandler.cs" />
     <Compile Include="HttpHandlerFactory.cs" />
