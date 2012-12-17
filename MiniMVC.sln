@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMVC", "MiniMVC\MiniMVC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMVC.Tests", "MiniMVC.Tests\MiniMVC.Tests.csproj", "{F32AC745-1813-4998-8C57-DF5D36AE59E5}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "SampleApp", "SampleApp\SampleApp.vbproj", "{F2AC5784-361F-4322-A715-A41D5C216CB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{F32AC745-1813-4998-8C57-DF5D36AE59E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F32AC745-1813-4998-8C57-DF5D36AE59E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F32AC745-1813-4998-8C57-DF5D36AE59E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2AC5784-361F-4322-A715-A41D5C216CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2AC5784-361F-4322-A715-A41D5C216CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2AC5784-361F-4322-A715-A41D5C216CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2AC5784-361F-4322-A715-A41D5C216CB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
