@@ -51,12 +51,10 @@
     <Compile Include="HttpAsyncHandler.cs" />
     <Compile Include="HttpAsyncHandlerWithReadOnlySession.cs" />
     <Compile Include="HttpAsyncHandlerWithSession.cs" />
-    <Compile Include="HttpContextStub.cs" />
     <Compile Include="HttpHandler.cs" />
     <Compile Include="HttpHandlerFactory.cs" />
     <Compile Include="HttpHandlerWithReadOnlySession.cs" />
     <Compile Include="HttpHandlerWithSession.cs" />
-    <Compile Include="HttpResponseStub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="Setup.cs" />
