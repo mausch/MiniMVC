@@ -6,7 +6,7 @@ Public Class Main
     Public Overrides Function GetHandler(context As HttpContextBase) As IHttpHandler
         If context.Request.Path = "/" Then
             Return New HttpHandler(Sub(ctx)
-                                       ctx.XDocument(<h1>Hello, <%= ctx.Request("name") %></h1>.MakeHTML5Doc())
+                                       ctx.XElement(<h1>Hello, <%= ctx.Request("name") %></h1>)
                                    End Sub)
         End If
         Return HttpHandler.NotFound

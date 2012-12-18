@@ -44,6 +44,18 @@ namespace MiniMVC {
             }
         }
 
+        public static void XElement(this HttpResponseBase response, XElement e) {
+            if (response == null)
+                throw new ArgumentNullException("response");
+            if (e == null)
+                throw new ArgumentNullException("e");
+            response.XDocument(new XDocument(e), null);
+        }
+
+        public static void XElement(this HttpContextBase context, XElement e) {
+            XElement(context.Response, e);
+        }
+
         public static void Empty(this HttpContextBase context) {}
 
         public static void Raw(this HttpContextBase context, object obj, string contentType) {
