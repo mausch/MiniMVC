@@ -21,16 +21,6 @@ using System.Xml;
 
 namespace MiniMVC {
     public static class Response {
-        public static void XDocument(this HttpContextBase context, XDocument doc, string contentType) {
-            if (context == null)
-                throw new ArgumentNullException("context");
-            XDocument(context.Response, doc, contentType);
-        }
-
-        public static void XDocument(this HttpContextBase context, XDocument doc) {
-            XDocument(context, doc, null);
-        }
-
         public static void XDocument(this HttpResponseBase response, XDocument doc, string contentType) {
             if (response == null)
                 throw new ArgumentNullException("response");
@@ -44,16 +34,39 @@ namespace MiniMVC {
             }
         }
 
-        public static void XElement(this HttpResponseBase response, XElement e) {
+        public static void XElement(this HttpResponseBase response, XElement e, string contentType) {
             if (response == null)
                 throw new ArgumentNullException("response");
             if (e == null)
                 throw new ArgumentNullException("e");
-            response.XDocument(new XDocument(e), null);
+            response.XDocument(new XDocument(e), contentType);
         }
 
-        public static void XElement(this HttpContextBase context, XElement e) {
-            XElement(context.Response, e);
+        private const string textHtml = "text/html";
+
+        public static void Html(this HttpResponseBase response, XDocument doc) {
+            response.XDocument(doc, textHtml);
+        }
+
+        public static void Html(this HttpContextBase context, XDocument doc) {
+            context.Response.Html(doc);
+        }
+
+        public static void Html(this HttpResponseBase response, XElement elem) {
+            response.Html(elem.MakeHTML5Doc());
+        }
+
+        public static void Html(this HttpContextBase context, XElement elem) {
+            context.Response.Html(elem);
+        }
+
+        public static void Html(this HttpResponseBase response, string html) {
+            response.ContentType = textHtml;
+            response.Write(html);
+        }
+
+        public static void Html(this HttpContextBase context, string html) {
+            context.Response.Html(html);
         }
 
         public static void Empty(this HttpContextBase context) {}
