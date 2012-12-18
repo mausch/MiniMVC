@@ -15,9 +15,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web;
 using System.Xml.Linq;
 using System.Xml;
@@ -73,5 +70,11 @@ namespace MiniMVC {
                 response.Write(obj);
             }
         }
+
+        public static void NotFound(this HttpContextBase context) {
+            context.Response.StatusCode = 404;
+        }
+
+        public static readonly IHttpHandler NotFoundHandler = new HttpHandler(NotFound);
     }
 }
