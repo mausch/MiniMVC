@@ -74,7 +74,5 @@ namespace MiniMVC {
         public static void NotFound(this HttpContextBase context) {
             context.Response.StatusCode = 404;
         }
-
-        public static readonly IHttpHandler NotFoundHandler = new HttpHandler(NotFound);
     }
 }

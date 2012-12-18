@@ -16,5 +16,7 @@ namespace MiniMVC {
         public void ProcessRequest(HttpContext context) {
             action(new HttpContextWrapper(context));
         }
+
+        public static readonly IHttpHandler NotFound = new HttpHandler(Response.NotFound);
     }
 }

@@ -9,6 +9,6 @@ Public Class Main
                                        ctx.XDocument(<h1>Hello, <%= ctx.Request("name") %></h1>.MakeHTML5Doc())
                                    End Sub)
         End If
-        Return Response.NotFoundHandler
+        Return HttpHandler.NotFound
     End Function
 End Class
