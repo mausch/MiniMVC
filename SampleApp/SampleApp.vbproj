@@ -88,6 +88,10 @@
     <Compile Include="Main.vb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MiniMVC.Task\MiniMVC.TaskAdapter.csproj">
+      <Project>{6e1ecbd2-c5ac-4089-9152-b8ec48f35b03}</Project>
+      <Name>MiniMVC.TaskAdapter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MiniMVC\MiniMVC.csproj">
       <Project>{bdfdd553-e5e3-46a7-94c5-3c507510fee6}</Project>
       <Name>MiniMVC</Name>
