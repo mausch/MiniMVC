@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>MiniMVC</id>
+    <version>1.0</version>
+    <authors>Mauricio Scheffer</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Web framework for embedded ASP.NET modules/handlers</description>
+    <licenseUrl>https://raw.github.com/mausch/MiniMVC/master/license.txt</licenseUrl>
+    <projectUrl>https://www.ohloh.net/p/MiniMVC-Net</projectUrl>
+    <summary>Web framework for embedded ASP.NET modules/handlers</summary>
+    <language>en-US</language>
+    <tags>web asp.net</tags>
+  </metadata>
+  <files>
+    <file src="MiniMVC.Task\bin\Release\MiniMVC.dll" target="lib\net35"/>
+    <file src="MiniMVC.Task\bin\Release\MiniMVC.pdb" target="lib\net35"/>
+    <file src="MiniMVC.Task\bin\Release\*" target="lib\net40"/>
+  </files>
+</package>

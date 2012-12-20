@@ -7,3 +7,4 @@ _ReSharper*
 *.cache
 test.db
 *.sln.ide
+*.nupkg
