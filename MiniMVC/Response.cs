@@ -48,16 +48,8 @@ namespace MiniMVC {
             response.XDocument(doc, textHtml);
         }
 
-        public static void Html(this HttpContextBase context, XDocument doc) {
-            context.Response.Html(doc);
-        }
-
         public static void Html(this HttpResponseBase response, XElement elem) {
             response.Html(elem.MakeHTML5Doc());
-        }
-
-        public static void Html(this HttpContextBase context, XElement elem) {
-            context.Response.Html(elem);
         }
 
         public static void Html(this HttpResponseBase response, string html) {
@@ -65,21 +57,7 @@ namespace MiniMVC {
             response.Write(html);
         }
 
-        public static void Html(this HttpContextBase context, string html) {
-            context.Response.Html(html);
-        }
-
-        public static void Empty(this HttpContextBase context) {}
-
-        public static void Raw(this HttpContextBase context, object obj, string contentType) {
-            if (context == null)
-                throw new ArgumentNullException("context");
-            Raw(context.Response, obj, contentType);
-        }
-
-        public static void Raw(this HttpContextBase context, object obj) {
-            Raw(context, obj, null);
-        }
+        public static void Empty(this HttpResponseBase context) {}
 
         public static void Raw(this HttpResponseBase response, object obj, string contentType) {
             if (response == null)
@@ -96,8 +74,8 @@ namespace MiniMVC {
             }
         }
 
-        public static void NotFound(this HttpContextBase context) {
-            context.Response.StatusCode = 404;
+        public static void NotFound(this HttpResponseBase response) {
+            response.StatusCode = 404;
         }
     }
 }

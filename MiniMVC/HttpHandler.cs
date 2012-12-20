@@ -17,6 +17,6 @@ namespace MiniMVC {
             action(new HttpContextWrapper(context));
         }
 
-        public static readonly IHttpHandler NotFound = new HttpHandler(Response.NotFound);
+        public static readonly IHttpHandler NotFound = new HttpHandler(ctx => ctx.Response.NotFound());
     }
 }
