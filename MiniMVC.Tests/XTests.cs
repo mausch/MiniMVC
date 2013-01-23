@@ -94,5 +94,13 @@ namespace MiniMVC.Tests {
             Assert.AreEqual("selected", options2[0].Attribute("selected").Value);
             Assert.IsNull(options2[1].Attribute("selected"));
         }
+
+        [Test]
+        public void RemoveAttribute() {
+            var e = X.E("option", X.A("selected", "selected"), X.A("class", "something"));
+            var ee = e.RemoveAttr("selected");
+            Assert.AreEqual(2, e.Attributes().Count());
+            Assert.AreEqual(1, ee.Attributes().Count());
+        }
     }
 }

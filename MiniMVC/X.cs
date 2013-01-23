@@ -268,6 +268,10 @@ namespace MiniMVC {
             });
         }
 
+        public static XElement UnselectOption(XElement option) {
+            return option.RemoveAttr("selected");
+        }
+
         public static XElement RemoveChildNodes(this XElement element) {
             var e = new XElement(element);
             e.RemoveNodes();
@@ -277,6 +281,13 @@ namespace MiniMVC {
         public static XElement RemoveAttr(this XElement element) {
             var e = new XElement(element);
             e.RemoveAttributes();
+            return e;
+        }
+
+        public static XElement RemoveAttr(this XElement element, string attribute) {
+            var e = element.RemoveAttr();
+            var attr = element.Attributes().Where(a => a.Name.LocalName != attribute).ToArray();
+            e.Add(attr);
             return e;
         }
 
