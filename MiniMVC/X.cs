@@ -291,6 +291,25 @@ namespace MiniMVC {
             return e;
         }
 
+        public static string AttributeValue(this XElement element, string attr) {
+            var a = element.Attribute(attr);
+            if (a == null)
+                return null;
+            return a.Value;
+        }
+
+        public static IEnumerable<string> SelectedValues(this IEnumerable<XElement> elements) {
+            return elements.Where(e => e.Attribute("selected") != null).Select(x => x.AttributeValue("value"));
+        }
+
+        public static string SelectedValue(this IEnumerable<XElement> elements) {
+            return elements.SelectedValues().FirstOrDefault();
+        }
+
+        public static string SelectedText(this IEnumerable<XElement> elements) {
+            return elements.Where(e => e.Attribute("selected") != null).Select(x => x.Value).FirstOrDefault();
+        }
+
         public static T Match<T>(this XNode node, Func<XCData, T> cdata, Func<XComment, T> comment, Func<XText, T> text, Func<XProcessingInstruction, T> instruction, Func<XElement, T> element) {
             var ncdata = node as XCData;
             if (ncdata != null)

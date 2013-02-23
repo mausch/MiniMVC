@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
+using System.Xml.Linq;
 
 namespace MiniMVC.Tests {
     [TestFixture]
@@ -101,6 +102,34 @@ namespace MiniMVC.Tests {
             var ee = e.RemoveAttr("selected");
             Assert.AreEqual(2, e.Attributes().Count());
             Assert.AreEqual(1, ee.Attributes().Count());
+        }
+
+        private static XAttribute Value(string value) {
+            return X.A("value", value);
+        }
+
+        [Test]
+        public void SelectedValue() {
+            var selected = X.A("selected", "selected");
+            var options = new[] {
+                X.E("option", selected, Value("1"), "uno"),
+                X.E("option", Value("2"), "dos"),
+                X.E("option", Value("3"), "tres"),
+            };
+            var value = options.SelectedValue();
+            Assert.AreEqual("1", value);
+        }
+
+        [Test]
+        public void SelectedText() {
+            var selected = X.A("selected", "selected");
+            var options = new[] {
+                X.E("option", selected, Value("1"), "uno"),
+                X.E("option", Value("2"), "dos"),
+                X.E("option", Value("3"), "tres"),
+            };
+            var value = options.SelectedText();
+            Assert.AreEqual("uno", value);
         }
     }
 }
