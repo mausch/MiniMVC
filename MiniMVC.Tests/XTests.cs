@@ -52,7 +52,7 @@ namespace MiniMVC.Tests {
             n.WriteToStream(ms);
             ms.Position = 0;
             var s = Encoding.UTF8.GetString(ms.ToArray());
-            Assert.AreEqual("﻿<a>  <img src=\"something\" /></a>", s);
+            Assert.AreEqual("<a>  <img src=\"something\" /></a>", s);
         }
 
         [Test]
