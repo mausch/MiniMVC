@@ -1,6 +1,15 @@
-*MiniMVC* is a simple MVC framework for embedded web modules.
+*MiniMVC* is a library for embedded ASP.NET web modules.
 
-Currently used in:
+It provides:
+
+* "Functions":https://github.com/mausch/MiniMVC/blob/master/MiniMVC/X.cs to treat System.Xml.Linq.XElements as HTML / XHTML
+* "Base class for IHttpHandlerFactory":https://github.com/mausch/MiniMVC/blob/master/MiniMVC/HttpHandlerFactory.cs
+* "Extension methods for HttpResponseBase":https://github.com/mausch/MiniMVC/blob/master/MiniMVC/Response.cs
+* Various wrappers for IHttpHandler, which lets you work with simple functions/procedures and then wrap them as IHttpHandler only when needed.
+
+"There's a minimal sample app":https://github.com/mausch/MiniMVC/blob/master/SampleApp/Main.vb
+
+This library is currently used in:
 
 * "NHWebConsole":http://github.com/mausch/NHWebConsole
 * "QuartzNetWebConsole":http://github.com/mausch/QuartzNetWebConsole
